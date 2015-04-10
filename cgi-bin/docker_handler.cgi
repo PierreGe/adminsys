@@ -19,7 +19,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     fi
     docker commit $service $service-duplicated
     docker run -d $service-duplicated
-    if [ "$the_world_is_flat" = true ] ; then
+    if [ "$stopped" = true ] ; then
       docker start $service
     fi
   fi
