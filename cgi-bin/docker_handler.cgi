@@ -69,14 +69,14 @@ echo '        <label for="wordpress"><img src="https://s.w.org/favicon.ico" widt
 echo '        <div class="installerMenu" id="wordpressInstaller">'
 echo '          some stuff here to config'
 echo '        </div>'
-echo '        <input type="button" value="Créer les services" style="display:block; margin:20 0 0 10px;">'
+echo '        <input type="button" value="Create" style="display:block; margin:20 0 0 10px;">'
 echo '      </form>'
 echo '    </div>'
 
 echo '    <div id="installer">'
 echo '      <form method="post" action="docker-handler.cgi">'
 echo '         Docker name (from DockerHub): <input type="text" name="fname"><br>'
-echo '      <input type="submit" value="Create">'
+echo '      <input type="submit"value="Create" style="display:block; margin:20 0 0 10px;">'
 echo '      </form>'
 echo '    </div>'
 
