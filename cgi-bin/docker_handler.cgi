@@ -11,6 +11,13 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
       docker start $service > /dev/null
     fi
   fi
+  if [[ $POST =~ ^duplicate=(.*)$ ]]; then
+    service="${BASH_REMATCH[1]}"
+    if [[ "$(docker ps)" =~ $service ]]; then
+      docker stop $service > /dev/null
+    fi
+    docker commit $service $service-duplicated
+  fi
   # Rename container
   if [[ $POST =~ ^newName=(.*)\&oldName=(.*)$ ]]; then
     newName="${BASH_REMATCH[1]}"
