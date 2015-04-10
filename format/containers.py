@@ -25,6 +25,7 @@ class Parser(object):
       print('<th>{0}</th>'.format(c))
     print('<th>TOGGLE</th>')
     print('<th>DUPLICATE</th>')
+    print('<th>DELETE</th>')
     print('</tr>')
     for row in self.data:
       print('<tr>')
@@ -52,6 +53,13 @@ class Parser(object):
       print('<input name="duplicate" type="hidden" value="{0}">'.format(row[0]))
       print('</form>')
       print('</td>')
+      print('<td>')
+      print('<form method="post" action="docker_handler.cgi">')
+      print('<input type="button" onclick="this.form.submit();" value="Delete" id="delete-button-{0}">'.format(row[0]))
+      print('<input name="delete" type="hidden" value="{0}">'.format(row[0]))
+      print('</form>')
+      print('</td>')
+      
       print('</tr>')
       
     print('</table>')
