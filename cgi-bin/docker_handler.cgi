@@ -36,6 +36,11 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     oldName="${BASH_REMATCH[2]}"
     docker rename "$oldName" "$newName"
   fi
+  if [[ $POST =~ ^installDockerhubApp=(.*)$ ]]; then
+    app="${BASH_REMATCH[1]}"
+    docker pull $app
+    docker run -d $app
+  fi
 fi
 
 echo "Content-type: text/html"
@@ -62,7 +67,7 @@ echo '      <div id="tools">'
 echo '        <input type="button" onclick="location.replace(location.href)" value="Reload" id="reloadButton">'
 echo '      </div>'
 echo '    </div>'
-echo '    <div class="installer" id="customInstaller">'
+echo '    <div id="installer">'
 echo '      <form method="post" action="docker-handler.cgi">'
 echo '        <input type="checkbox" value="Wordpress" id="wordpress">'
 echo '        <label for="wordpress"><img src="https://s.w.org/favicon.ico" width="15" height="15">Wordpress</label>'
@@ -73,9 +78,9 @@ echo '        <input type="button" value="Create" style="display:block; margin:2
 echo '      </form>'
 echo '    </div>'
 
-echo '    <div class="installer" id="dockerhubInstaller">'
+echo '    <div id="installer-from-dockerhub">'
 echo '      <form method="post" action="docker-handler.cgi">'
-echo '         Docker name (from DockerHub): <input type="text" name="install-dockerhub-app"><br>'
+echo '         Docker name (from DockerHub): <input type="text" name="installDockerhubApp"><br>'
 echo '      <input type="submit"value="Create" style="display:block; margin:20 0 0 10px;">'
 echo '      </form>'
 echo '    </div>'
