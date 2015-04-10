@@ -75,7 +75,7 @@ echo '    </div>'
 
 echo '    <div id="installer">'
 echo '      <form method="post" action="docker-handler.cgi">'
-echo '         Docker name (from DockerHub): <input type="text" name="fname"><br>'
+echo '         Docker name (from DockerHub): <input type="text" name="dockerhub-app-name"><br>'
 echo '      <input type="submit"value="Create" style="display:block; margin:20 0 0 10px;">'
 echo '      </form>'
 echo '    </div>'
