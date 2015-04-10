@@ -44,6 +44,11 @@ class Parser(object):
       print('<span class="switch-handle"></span>')
       print('</label>')
       print('</form>')
+      
+      print('<form method="post" action="docker_handler.cgi">')
+      print('<input type="button" onclick="location.replace(location.href)" value="duplicate-{0}" id="duplicate-button-{0}">'.format(row[0]))
+      print('</form>')
+      
       print('</td>')
       print('</tr>')
     print('</table>')
