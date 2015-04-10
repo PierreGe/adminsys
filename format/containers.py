@@ -48,7 +48,7 @@ class Parser(object):
       print('</td>')
       print('<td>')
       print('<form method="post" action="docker_handler.cgi">')
-      print('<input type="button" onclick="location.replace(location.href)" value="duplicate-{0}" id="duplicate-button-{0}">'.format(row[0]))
+      print('<input type="button" onclick="this.form.submit();" value="duplicate-{0}" id="duplicate-button-{0}">'.format(row[0]))
       print('</form>')
       print('</td>')
       print('</tr>')
