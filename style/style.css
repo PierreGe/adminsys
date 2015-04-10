@@ -67,7 +67,7 @@ form {
   display:block;
 }
 
-#installer {
+.installer {
   padding: 20 10px;
   background-color:whitesmoke;
   margin-top: 20px;
