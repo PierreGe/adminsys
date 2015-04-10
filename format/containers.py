@@ -24,6 +24,7 @@ class Parser(object):
     for c in self.columnName:
       print('<th>{0}</th>'.format(c))
     print('<th>TOGGLE</th>')
+    print('<th>DUPLICATE</th>')
     print('</tr>')
     for row in self.data:
       print('<tr>')
@@ -45,20 +46,13 @@ class Parser(object):
       print('</label>')
       print('</form>')
       print('</td>')
-      print('</tr>')
-      
-    print('<th>DUPLICATE</th>')
-    print('</tr>')
-    for row in self.data:
-      print('<tr>')
-      for cellContent in row[:-1]:
-        print('<td>{0}</td>'.format(cellContent))
       print('<td>')
       print('<form method="post" action="docker_handler.cgi">')
       print('<input type="button" onclick="location.replace(location.href)" value="duplicate-{0}" id="duplicate-button-{0}">'.format(row[0]))
       print('</form>')
       print('</td>')
       print('</tr>')
+      
     print('</table>')
 
 def main():
