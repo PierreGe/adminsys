@@ -14,10 +14,14 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
   if [[ $POST =~ ^duplicate=(.*)$ ]]; then
     service="${BASH_REMATCH[1]}"
     if [[ "$(docker ps)" =~ $service ]]; then
+      stopped=true
       docker stop $service > /dev/null
     fi
     docker commit $service $service-duplicated
     docker run -d $service-duplicated
+    if [ "$the_world_is_flat" = true ] ; then
+      docker start $service
+    fi
   fi
   if [[ $POST =~ ^delete=(.*)$ ]]; then
     service="${BASH_REMATCH[1]}"
