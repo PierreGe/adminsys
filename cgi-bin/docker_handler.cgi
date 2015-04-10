@@ -17,6 +17,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
       docker stop $service > /dev/null
     fi
     docker commit $service $service-duplicated
+    docker run -d $service-duplicated
   fi
   # Rename container
   if [[ $POST =~ ^newName=(.*)\&oldName=(.*)$ ]]; then
