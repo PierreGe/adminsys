@@ -6,7 +6,7 @@ table {
   border:1px solid #dddddd;
   border-collapse:collapse;
   border-spacing: 0;
-  font-size: 15px;
+  font-size: 12px;
   font-family: Verdana,Geneva,Tahoma,Arial,Helvetica,sans-serif;
   color:#333;
 }
@@ -51,7 +51,7 @@ form {
 }
 
 .containerName {
-  font-size:15px;
+  font-size:12px;
   border:none;
   background-color:transparent;
 }
