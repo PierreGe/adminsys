@@ -1,0 +1,49 @@
+#!/usr/bin/python
+#-*-coding:utf8-*
+
+import sys
+
+class Parser(object):
+  def __init__(self, string):
+    self.string = string.split('\n')
+    self.columnName = ["CONTAINER ID", "IMAGE", "COMMAND", "CREATED", "STATUS", "PORTS", "NAMES"]
+    self.indexes = [self.string[0].index(columnName) for columnName in self.columnName]
+
+  def parse(self):
+    self.data = []
+    for row in self.string[1:]:
+      r = []
+      for i in range(len(self.columnName)-1):
+        r.append(row[self.indexes[i]:self.indexes[i+1]].strip())
+      r.append(row[self.indexes[-1]:].strip())
+      self.data.append(r)
+
+  def format(self):
+    print('<table>')
+    print('<tr>')
+    for c in self.columnName:
+      print('<th>{0}</th>'.format(c))
+    print('</tr>')
+    for row in self.data:
+      print('<tr>')
+      for cellContent in row:
+        print('<td>{0}</td>'.format(cellContent))
+      print('<td>')
+      print('<label class="switch">')
+      print('<form>')
+      print('<input type="checkbox" onclick="this.form.submit();" class="switch-input" value="{0}" {1}>'.format(row[0],"checked" if "Up" in row[4] else ""))
+      print('</form>')
+      print('<span data-off="Off" data-on="On" class="switch-label"></span>')
+      print('<span class="switch-handle"></span>')
+      print('</label>')
+      print('</td>')
+      print('</tr>')
+    print('</table>')
+
+def main():
+  p = Parser(sys.argv[1])
+  p.parse()
+  p.format()
+
+if __name__=="__main__":
+  main()
