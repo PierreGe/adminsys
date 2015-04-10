@@ -19,6 +19,13 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     docker commit $service $service-duplicated
     docker run -d $service-duplicated
   fi
+  if [[ $POST =~ ^delete=(.*)$ ]]; then
+    service="${BASH_REMATCH[1]}"
+    if [[ "$(docker ps)" =~ $service ]]; then
+      docker stop $service > /dev/null
+    fi
+    docker rm $service
+  fi
   # Rename container
   if [[ $POST =~ ^newName=(.*)\&oldName=(.*)$ ]]; then
     newName="${BASH_REMATCH[1]}"
