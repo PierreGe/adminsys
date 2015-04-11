@@ -89,7 +89,7 @@ echo '      <form method="post" action="docker-handler.cgi">'
 #echo '        <label>Mot de passe mysql</label>'
 #echo '        <input type="password" name="mysqlPass" value="root" >'
 #echo '        </div>'
-echo '        <input type="button" value="Create" onclick="this.form.submit()" style="display:block; margin:20 0 0 10px;">'
+echo '        <input type="submit" value="Create" style="display:block; margin:20 0 0 10px;">'
 echo '      </form>'
 echo '    </div>'
 
