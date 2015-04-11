@@ -4,7 +4,7 @@ test=""
 
 if [ "$REQUEST_METHOD" = "POST" ]; then
   POST=$(</dev/stdin)
-  $test=$POST
+  test=$POST
   # Start / Stop container
   if [[ $POST =~ ^toggleService=(.*)$ ]]; then
     service="${BASH_REMATCH[1]}"
