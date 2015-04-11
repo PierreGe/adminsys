@@ -2,7 +2,7 @@ body {
   display:inline-block;
 }
 
-table {
+#services table {
   border:1px solid #dddddd;
   border-collapse:collapse;
   border-spacing: 0;
@@ -11,28 +11,28 @@ table {
   color:#333;
 }
 
-table tr:nth-child(2n+1) {
+#services table tr:nth-child(2n+1) {
   background-color:white;
 }
 
-table tr:nth-child(2n) {
+#services table tr:nth-child(2n) {
   background-color:#f1f1f1;
 }
 
-tr {
+#services tr {
   border:1px solid #dddddd;
 }
 
-th, td {
+#services th, td {
   text-align: left;
   vertical-align:middle;
 }
 
-th {
+#services th {
   padding:12 8 12 8px; 
 }
 
-td {
+#services td {
   padding:8px;
 }
 
