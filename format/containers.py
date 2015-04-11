@@ -19,7 +19,7 @@ class Parser(object):
       self.data.append(r)
       
   def getExternalPort(self,string):
-    i = sting.find("->")
+    i = string.find("->")
     if i==-1:
       return None
     j=i-1
