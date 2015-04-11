@@ -42,12 +42,13 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     docker run -d $app
   fi
   # add wordpress
-  if [[ $POST =~ ^wordpress=install\&wordpress-name=(.*)\&wordpress-port=(.*)\&mysql-pass=(.*)$ ]]; then
+  if [[ $POST =~ ^wordpress=install\&wordpressName=(.*)\&wordpressPort=(.*)\&mysqlPass=(.*)$ ]]; then
     wpName="${BASH_REMATCH[1]}"
     wpPort="${BASH_REMATCH[2]}"
     mysqlPass="${BASH_REMATCH[4]}"
-    docker run --name "mysql-"$wpName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
-    docker run --name $wpName --link "mysql-"$wpName:"mysql-"$wpName -p $wpPort:80 -d wordpress -e WORDPRESS_DB_USER="root" -e WORDPRESS_DB_PASSWORD="$mysqlPass"
+    docker run --name mysql -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest
+    #docker run --name "mysql-"$wpName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+    #docker run --name $wpName --link "mysql-"$wpName:"mysql-"$wpName -p $wpPort:80 -d wordpress -e WORDPRESS_DB_USER="root" -e WORDPRESS_DB_PASSWORD="$mysqlPass"
   fi
 fi
 
@@ -82,11 +83,11 @@ echo '        <input type="checkbox" name="wordpress" value="install" id="wordpr
 echo '        <label for="wordpress"><img src="https://s.w.org/favicon.ico" width="15" height="15">Wordpress</label>'
 echo '        <div class="installerMenu" id="wordpressInstaller">'
 echo '        <label>Nom du container</label>'  
-echo '        <input type="text" name="wordpress-name" value="wordpress" >'
+echo '        <input type="text" name="wordpressName" value="wordpress" >'
 echo '        <label>Port</label>'
-echo '        <input type="text" name="wordpress-port" value="8080" >'
+echo '        <input type="text" name="wordpressPort" value="8080" >'
 echo '        <label>Mot de passe mysql</label>'
-echo '        <input type="password" name="mysql-pass" value="root" >'
+echo '        <input type="password" name="mysqlPass" value="root" >'
 echo '        </div>'
 echo '        <input type="button" value="Create" onclick="this.form.submit()" style="display:block; margin:20 0 0 10px;">'
 echo '      </form>'
