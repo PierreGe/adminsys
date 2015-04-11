@@ -54,11 +54,11 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
   if [[ $POST =~ ^newPort=(.*)\&serviceId=(.*)$ ]]; then
     newPort="${BASH_REMATCH[1]}"
     serviceId="${BASH_REMATCH[2]}"
-    if [[ "$(docker ps)" =~ $serviceId ]]; then
+    #if [[ "$(docker ps)" =~ $serviceId ]]; then
       docker stop $serviceId  > /dev/null
-    fi
-    docker commit $serviceId $serviceId > /dev/null
-    docker run -p $newPort:80 -td $serviceId > /dev/null
+    #fi
+    #docker commit $serviceId $serviceId > /dev/null
+    #docker run -p $newPort:80 -td $serviceId > /dev/null
   fi
 fi
 
