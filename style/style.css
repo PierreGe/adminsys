@@ -36,6 +36,12 @@ body {
   padding:8px;
 }
 
+#services input[type='text'] {
+  font-size:12px;
+  border:none;
+  background-color:transparent;
+}
+
 form {
   padding:0;
   margin:0;
@@ -52,12 +58,6 @@ form {
 
 .installerMenu label {
   display:block;
-}
-
-.containerName {
-  font-size:12px;
-  border:none;
-  background-color:transparent;
 }
 
 .installerMenu {
