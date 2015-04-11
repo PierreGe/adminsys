@@ -44,11 +44,18 @@ class Parser(object):
       else:
         print('<td>{0}</td>'.format(row[0]))
         
-      for cellContent in row[1:-1]:
+      for cellContent in row[1:-2]:
         print('<td>{0}</td>'.format(cellContent))
       print('<td>')
       print('  <form method="post" action="docker_handler.cgi">')
-      print('    <input type="text" name="newName" value="{0}" class="containerName" onfocus="this.style.border=\'1px solid lightgrey\'; this.style.background=\'white\'" onblur="this.style.border=\'none\'; this.style.background=\'transparent\'; if (this.value!=this.form.oldName.value) this.form.submit()" >'.format(row[-1]))
+      print('    <input type="text" name="newPort" value="{0}" class="textinput" onfocus="this.style.border=\'1px solid lightgrey\'; this.style.background=\'white\'; this.value=\'this.form.oldPort.value\'" onblur="this.style.border=\'none\'; this.style.background=\'transparent\'; if (this.value!=this.form.oldName.value) this.form.submit()" >'.format(row[-2]))
+      print('    <input type="hidden" name="oldPort" value="{0}">'.format(port if port!=None else ''))
+      print('  </form>')
+      print('</td>')
+      print('<td>')
+      print('<td>')
+      print('  <form method="post" action="docker_handler.cgi">')
+      print('    <input type="text" name="newName" value="{0}" class="textinput" onfocus="this.style.border=\'1px solid lightgrey\'; this.style.background=\'white\'" onblur="this.style.border=\'none\'; this.style.background=\'transparent\'; if (this.value!=this.form.oldName.value) this.form.submit()" >'.format(row[-1]))
       print('    <input type="hidden" name="oldName" value="{0}">'.format(row[-1]))
       print('  </form>')
       print('</td>')
