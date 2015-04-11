@@ -36,8 +36,9 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     oldName="${BASH_REMATCH[2]}"
     docker rename "$oldName" "$newName"
   fi
-  if [[ $POST =~ ^installDockerhubApp=(.*)$ ]]; then
+  if [[ $POST =~ ^installDockerhubApp=(.*)\&dockerPort=(.*)$ ]]; then
     app="${BASH_REMATCH[1]}"
+    port="${BASH_REMATCH[2]}"
     (docker pull $app > /dev/null; docker run -d $app > /dev/null )&
   fi
   # add wordpress
@@ -105,6 +106,7 @@ echo '    </div>'
 echo '    <div class="installer" id="dockerhubInstaller">'
 echo '      <form method="post" action="docker_handler.cgi">'
 echo '         Docker name (from DockerHub): <input type="text" name="installDockerhubApp"><br>'
+echo '         Docker port : <input type="text" name="dockerPort"><br>'
 echo '      <input type="submit"value="Create" style="display:block; margin:20 0 0 10px;">'
 echo '      </form>'
 echo '    </div>'
