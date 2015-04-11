@@ -50,6 +50,10 @@ form {
   vertical-align:middle;
 }
 
+.installerMenu label {
+  display:block;
+}
+
 .containerName {
   font-size:12px;
   border:none;
