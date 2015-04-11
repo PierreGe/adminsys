@@ -67,7 +67,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     fi
     test=$imageName
     # on regarde s'il s'agit d'une image mère
-    if [[ "$(cat dockerfile/image.dat)" =~ $imageName ]]; then
+    if [[ "$(cat ../dockerfile/image.dat)" =~ $imageName ]]; then
       i=1
       while [[ "$(docker images)" =~ $imageName"-"$i ]]; do
         i=$i+1
