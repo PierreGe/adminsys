@@ -57,9 +57,8 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     if [[ "$(docker ps)" =~ $serviceId ]]; then
       docker stop $serviceId  > /dev/null
     fi
-    docker commit $serviceId $serviceId"2"
-    docker run -p $newPort:80 -td $serviceId"2"
-
+    docker commit $serviceId $serviceId > /dev/null
+    docker run -p $newPort:80 -td $serviceId > /dev/null
   fi
 fi
 
