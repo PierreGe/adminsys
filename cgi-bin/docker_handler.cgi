@@ -54,7 +54,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     docker run --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress > /dev/null
   fi
   # change container port
-  if [[ $POST =~ ^newPort=(.*)\&serviceId=(.*)\&imageId=(.*)$ ]]; then
+  if [[ $POST =~ ^newPort=(.*)\&serviceId=(.*)\&imageName=(.*)$ ]]; then
     newPort="${BASH_REMATCH[1]}"
     serviceId="${BASH_REMATCH[2]}"
     imageName="${BASH_REMATCH[3]}"
@@ -62,27 +62,20 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
       docker stop $serviceId  > /dev/null
     fi
     
-    if [[ $imageName =~ ^(.*):(.*)$ ]]; then # nom avec un tag
-      name="${BASH_REMATCH[1]}"
-      tag="${BASH_REMATCH[2]}"
-      # on regarde s'il s'agit d'une image mère
-      if [[ "$(cat dockerfile/image.dat)" =~ $name ]]; then
-        i=1
-        while [[ "$(docker images)" =~ $name"-"$i ]]; do
-          i=$i+1
-        done;
-        imageName=$name"-"$i":"$tag
-      fi
-    else # nom sans tag
-      # on regarde s'il s'agit d'une image mère
-      if [[ "$(cat dockerfile/image.dat)" =~ $imageName ]]; then
-        i=1
-        while [[ "$(docker images)" =~ $imageName"-"$i ]]; do
-          i=$i+1
-        done;
-        imageName=$imageName"-"$i
-      fi
+    # on retire le tag
+    if [[ $imageName =~ ^(.*)%3A(.*)$ ]]; then
+      imageName="${BASH_REMATCH[1]}"
     fi
+    
+    # on regarde s'il s'agit d'une image mère
+    if [[ "$(cat dockerfile/image.dat)" =~ $imageName ]]; then
+      i=1
+      while [[ "$(docker images)" =~ $imageName"-"$i ]]; do
+        i=$i+1
+      done;
+      imageName=$imageName"-"$i
+    fi
+    
     docker commit $serviceId $imageName > /dev/null
     docker run -p $newPort:80 -td $imageName > /dev/null
     docker rm $serviceId > /dev/null
