@@ -4,7 +4,6 @@ test=""
 
 if [ "$REQUEST_METHOD" = "POST" ]; then
   POST=$(</dev/stdin)
-  test=$POST
   # Start / Stop container
   if [[ $POST =~ ^toggleService=(.*)$ ]]; then
     service="${BASH_REMATCH[1]}"
@@ -66,7 +65,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     if [[ $imageName =~ ^(.*)%3A(.*)$ ]]; then
       imageName="${BASH_REMATCH[1]}"
     fi
-    
+    test=$imageName
     # on regarde s'il s'agit d'une image mère
     if [[ "$(cat dockerfile/image.dat)" =~ $imageName ]]; then
       i=1
