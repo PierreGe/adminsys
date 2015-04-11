@@ -99,6 +99,7 @@ echo '          </table>'
 echo '        </div>'
 echo '        <input type="button" onclick="this.form.submit();" value="Create" style="display:block; margin:20 0 0 10px;">'
 echo '      </form>'
+echo '      <a href='"$SERVER_ADDR"':8080">plop</a>'
 echo '    </div>'
 
 
