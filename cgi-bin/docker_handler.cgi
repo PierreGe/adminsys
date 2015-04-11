@@ -38,8 +38,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
   fi
   if [[ $POST =~ ^installDockerhubApp=(.*)$ ]]; then
     app="${BASH_REMATCH[1]}"
-    docker pull $app
-    docker run -d $app
+    (docker pull $app; docker run -d $app )&
   fi
   # add wordpress
   if [[ $POST =~ ^wordpress=install\&wordpressName=(.*)\&wordpressPort=(.*)\&mysqlPass=(.*)$ ]]; then
