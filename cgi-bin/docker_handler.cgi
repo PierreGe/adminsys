@@ -1,7 +1,10 @@
 #!/bin/bash
 
+test=""
+
 if [ "$REQUEST_METHOD" = "POST" ]; then
   POST=$(</dev/stdin)
+  $test=$POST
   # Start / Stop container
   if [[ $POST =~ ^toggleService=(.*)$ ]]; then
     service="${BASH_REMATCH[1]}"
@@ -79,6 +82,7 @@ echo '  <div id="content">'
 echo '    <div id="userinfo">'
 echo '      <p>Nom : root</p>'
 echo '      <p>Pass : root</p>'
+echo "$test"
 echo '    </div>'
 echo '    <div id="services">'
 python ../format/containers.py "$(docker ps -a)"
