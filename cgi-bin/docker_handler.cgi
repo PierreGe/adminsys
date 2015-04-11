@@ -49,7 +49,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     docker run --name mysql -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest > /dev/null
     #docker run --name "mysql-"$wpName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
     #docker run --name $wpName --link "mysql-"$wpName:"mysql-"$wpName -p $wpPort:80 -d wordpress -e WORDPRESS_DB_USER="root" -e WORDPRESS_DB_PASSWORD="$mysqlPass"
-#  fi
+  fi
 fi
 
 echo "Content-type: text/html"
