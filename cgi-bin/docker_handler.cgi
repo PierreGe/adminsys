@@ -49,7 +49,17 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     mysqlPass="${BASH_REMATCH[3]}"
     docker run --name $mysqlName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest > /dev/null
     docker run --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress > /dev/null
-    #docker run --name "mysql-"$wpName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+  fi
+  # change container port
+  if [[ $POST =~ ^newPort=(.*)\&serviceId=(.*)$ ]]; then
+    newPort="${BASH_REMATCH[1]}"
+    serviceId="${BASH_REMATCH[2]}"
+    if [[ "$(docker ps)" =~ $serviceId ]]; then
+      docker stop $serviceId  > /dev/null
+    fi
+    docker commit $serviceId $serviceId"2"
+    docker run -p $newPort:80 -td $serviceId"2"
+
   fi
 fi
 
