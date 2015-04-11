@@ -92,7 +92,6 @@ echo '      <form method="post" action="docker_handler.cgi">'
 #echo '        <input type="text" name="test" value="test">'
 #echo '        <input type="submit" value="Create" style="display:block; margin:20 0 0 10px;">'
 echo '         <input type="button" onclick="this.form.submit();" value="Delete">'
-echo '         <input name="delete" type="hidden" value="test">'
 echo '      </form>'
 echo '    </div>'
 
