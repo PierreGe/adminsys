@@ -19,14 +19,15 @@ class Parser(object):
       self.data.append(r)
       
   def getExtenalPort(self,string):
-    i = sting.find("->")
-    print(i)
-    if i==-1:
-      return None
-    j=i-1
-    while string[j]!=':':
-      j-=1
-    return string[j:i]
+    #i = sting.find("->")
+    print(string)
+    #if i==-1:
+    #  return None
+    #j=i-1
+    #while string[j]!=':':
+    #  j-=1
+    #return string[j:i]
+    return 'plop'
 
   def format(self):
     print('<table>')
