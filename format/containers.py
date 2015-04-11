@@ -53,7 +53,6 @@ class Parser(object):
       print('  </form>')
       print('</td>')
       print('<td>')
-      print('<td>')
       print('  <form method="post" action="docker_handler.cgi">')
       print('    <input type="text" name="newName" value="{0}" onfocus="this.style.border=\'1px solid lightgrey\'; this.style.background=\'white\'" onblur="this.style.border=\'none\'; this.style.background=\'transparent\'; if (this.value!=this.form.oldName.value) this.form.submit()" >'.format(row[-1]))
       print('    <input type="hidden" name="oldName" value="{0}">'.format(row[-1]))
