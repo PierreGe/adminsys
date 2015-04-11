@@ -51,7 +51,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     docker run --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress > /dev/null
   fi
   # change container port
-  if [[ $POST =~ ^newPort=(.*)\&serviceId=(.*)$ ]]; then
+  if [[ $POST =~ ^serviceId=(.*)\&newPort=(.*)$ ]]; then
     newPort="${BASH_REMATCH[1]}"
     serviceId="${BASH_REMATCH[2]}"
     #if [[ "$(docker ps)" =~ $serviceId ]]; then
