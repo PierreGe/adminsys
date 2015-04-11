@@ -42,6 +42,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     app="${BASH_REMATCH[1]}"
     port="${BASH_REMATCH[2]}"
     (docker pull $app > /dev/null; docker run -p $port:80 -d $app > /dev/null )&
+    $app"\n" >> ../dockerfile/image.dat
   fi
   # add wordpress
   if [[ $POST =~ ^wordpress=install\&wordpressName=(.*)\&wordpressPort=(.*)\&mysqlPass=(.*)$ ]]; then
