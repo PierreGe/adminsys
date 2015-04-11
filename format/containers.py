@@ -49,6 +49,7 @@ class Parser(object):
       print('<td>')
       print('  <form method="post" action="docker_handler.cgi">')
       print('    <input type="text" name="newPort" value="{0}" defaultValue="{0}" port="{1}" onfocus="this.style.border=\'1px solid lightgrey\'; this.style.background=\'white\'; this.value=this.getAttribute(\'port\')" onblur="this.style.border=\'none\'; this.style.background=\'transparent\'; if (this.value!=this.getAttribute(\'port\')) this.form.submit(); else this.value=this.getAttribute(\'defaultValue\');" >'.format(row[-2],port if port!=None else ''))
+      print('    <input type="hidden" name="serviceId" value="{0}"'.format(row[0]))
       print('  </form>')
       print('</td>')
       print('<td>')
