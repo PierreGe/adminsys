@@ -79,7 +79,7 @@ echo '    </div>'
 
 echo '    <div class="installer" id="customInstaller">'
 echo '      <form method="post" action="docker_handler.cgi">'
-#echo '        <input type="checkbox" name="wordpress" value="install" id="wordpress">'
+echo '        <input type="checkbox" name="wordpress" value="install" id="wordpress">'
 #echo '        <label for="wordpress"><img src="https://s.w.org/favicon.ico" width="15" height="15">Wordpress</label>'
 #echo '        <div class="installerMenu" id="wordpressInstaller">'
 #echo '        <label>Nom du container</label>'  
