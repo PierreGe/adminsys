@@ -20,6 +20,7 @@ class Parser(object):
       
   def getExtenalPort(self,string):
     i = sting.find("->")
+    print(i)
     if i==-1:
       return None
     j=i-1
@@ -38,8 +39,7 @@ class Parser(object):
     print('</tr>')
     for row in self.data:
       print('<tr>')
-      #port = self.getExternalPort(row[-2])
-      port = 'plop'
+      port = self.getExternalPort(row[-2])
       if (port!=None):
         print('<td><a href="http://supayr.ninja:{1}">{0}</a></td>'.format(row[0],'8080'))
       else:
