@@ -48,7 +48,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     wpPort="${BASH_REMATCH[2]}"
     mysqlPass="${BASH_REMATCH[3]}"
     docker run --name $mysqlName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest > /dev/null
-    docker run --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress -e WORDPRESS_DB_USER="root" -e WORDPRESS_DB_PASSWORD="$mysqlPass" > /dev/null
+    docker run --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=$mysqlPass > /dev/null
     #docker run --name "mysql-"$wpName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
   fi
 fi
