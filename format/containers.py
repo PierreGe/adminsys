@@ -40,7 +40,7 @@ class Parser(object):
       print('<tr>')
       port = self.getExternalPort(row[-2])
       if (port!=None):
-        print('<td><a href="http://supayr.ninja:{1}">{0}</a></td>'.format(row[0],'8080'))
+        print('<td><a href="http://supayr.ninja:{1}">{0}</a></td>'.format(row[0],port))
       else:
         print('<td>{0}</td>'.format(row[0]))
         
