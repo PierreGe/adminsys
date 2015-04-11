@@ -18,16 +18,14 @@ class Parser(object):
       r.append(row[self.indexes[-1]:].strip())
       self.data.append(r)
       
-  def getExtenalPort(self,string):
-    #i = sting.find("->")
-    print(string)
-    #if i==-1:
-    #  return None
-    #j=i-1
-    #while string[j]!=':':
-    #  j-=1
-    #return string[j:i]
-    return 'plop'
+  def getExternalPort(self,string):
+    i = sting.find("->")
+    if i==-1:
+      return None
+    j=i-1
+    while string[j]!=':':
+      j-=1
+    return string[j:i]
 
   def format(self):
     print('<table>')
