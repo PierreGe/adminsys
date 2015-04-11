@@ -41,6 +41,14 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     docker pull $app
     docker run -d $app
   fi
+  # add wordpress
+  if [[ $POST =~ ^wordpress=install\&wordpress-name=(.*)\&wordpress-port=(.*)\&mysql-pass=(.*)$ ]]; then
+    wpName="${BASH_REMATCH[1]}"
+    wpPort="${BASH_REMATCH[2]}"
+    mysqlPass="${BASH_REMATCH[4]}"
+    docker run --name "mysql-"$wpName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+    docker run --name $wpName --link "mysql-"$wpName:"mysql-"$wpName -p $wpPort:80 -d wordpress -e WORDPRESS_DB_USER="root" -e WORDPRESS_DB_PASSWORD="$mysqlPass"
+  fi
 fi
 
 echo "Content-type: text/html"
@@ -70,15 +78,13 @@ echo '    </div>'
 
 echo '    <div class="installer" id="customInstaller">'
 echo '      <form method="post" action="docker-handler.cgi">'
-echo '        <input type="checkbox" value="Wordpress" id="wordpress">'
+echo '        <input type="checkbox" name="wordpress" value="install" id="wordpress">'
 echo '        <label for="wordpress"><img src="https://s.w.org/favicon.ico" width="15" height="15">Wordpress</label>'
 echo '        <div class="installerMenu" id="wordpressInstaller">'
 echo '        <label>Nom du container</label>'  
-echo '        <input type="text" name="wordpress-name" value="" >'
+echo '        <input type="text" name="wordpress-name" value="wordpress" >'
 echo '        <label>Port</label>'
 echo '        <input type="text" name="wordpress-port" value="8080" >'
-echo "        <label>Nom d'utilisateur mysql</label>"
-echo '        <input type="text" name="mysql-username" value="root" >'
 echo '        <label>Mot de passe mysql</label>'
 echo '        <input type="password" name="mysql-pass" value="root" >'
 echo '        </div>'
