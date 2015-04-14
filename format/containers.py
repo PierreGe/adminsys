@@ -38,7 +38,7 @@ class Parser(object):
     print('</tr>')
     for row in self.data:
       print('<tr>')
-      port = self.getExternalPort(row[-2])
+      port = self.getPort(row[-2])
       if (port!=None):
         print('<td><a href="http://supayr.ninja:{1}" target="_blank">{0}</a></td>'.format(row[0],port[1]))
       else:
