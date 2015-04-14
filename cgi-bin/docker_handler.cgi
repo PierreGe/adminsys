@@ -66,7 +66,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     if [[ $imageName =~ ^(.*)%3A(.*)$ ]]; then
       imageName="${BASH_REMATCH[1]}"
     fi
-    test=$imageName
+    test=$newPort
     # on regarde s'il s'agit d'une image mère
     if [[ "$(cat ../dockerfile/image.dat)" =~ $imageName ]]; then
       i=1
