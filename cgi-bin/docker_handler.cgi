@@ -78,7 +78,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     fi
     
     docker commit $serviceId $imageName > /dev/null
-    docker run -p $newPort -td $imageName > $test2
+    test2="$(docker run -p $newPort -td $imageName)
     docker rm $serviceId > /dev/null
   fi
 fi
