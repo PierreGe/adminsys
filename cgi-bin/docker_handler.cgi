@@ -55,7 +55,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
   fi
   # change container port
   if [[ $POST =~ ^newPort=(.*)\&serviceId=(.*)\&imageName=(.*)$ ]]; then
-    newPort="${BASH_REMATCH[1]/%3A/:}"
+    newPort="${BASH_REMATCH[1]/'%3A'/:}"
     serviceId="${BASH_REMATCH[2]}"
     imageName="${BASH_REMATCH[3]}"
     if [[ "$(docker ps)" =~ $serviceId ]]; then
