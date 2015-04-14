@@ -108,7 +108,7 @@ echo '    <div id="userinfo">'
 echo '      <p>Nom : root</p>'
 echo '      <p>Pass : root</p>'
 echo "$test"
-echo "$test2"
+#echo "$test2"
 echo '    </div>'
 echo '    <div id="services">'
 python ../format/containers.py "$(docker ps -a)"
