@@ -71,6 +71,10 @@ form {
   display:block;
 }
 
+#djangocms:checked ~ #djangocmsInstaller {
+  display:block;
+}
+
 .installer {
   padding: 20 10px;
   background-color:whitesmoke;
