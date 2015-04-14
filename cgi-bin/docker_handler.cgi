@@ -104,13 +104,14 @@ echo '  <div id="content">'
 #echo '      <p>DjangoCMS Login : admin / Pass : djangocms</p>'
 #echo '    </div>'
 echo "    <h1> Interface d'administration </h1>"
+echo "    <h2> Services en cours d'éxection </h2>"
 echo '    <div id="services">'
 python ../format/containers.py "$(docker ps -a)"
 echo '      <div id="tools">'
 echo '        <input type="button" onclick="location.replace(location.href)" value="Reload" id="reloadButton">'
 echo '      </div>'
 echo '    </div>'
-
+echo "    <h2> Installer de nouveaux services </h2>"
 echo '    <div class="installer" id="customInstaller">'
 echo '      <form method="post" action="docker_handler.cgi">'
 echo '        <input type="checkbox" name="wordpress" value="install" id="wordpress">'
