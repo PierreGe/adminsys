@@ -18,14 +18,14 @@ class Parser(object):
       r.append(row[self.indexes[-1]:].strip())
       self.data.append(r)
       
-  def getExternalPort(self,string):
+  def getPort(self,string):
     i = string.find("->")
     if i==-1:
       return None
     j=i-1
     while string[j]!=':':
       j-=1
-    return string[j+1:i]
+    return string[:j],string[j+1:i]
 
   def format(self):
     print('<table>')
@@ -40,7 +40,7 @@ class Parser(object):
       print('<tr>')
       port = self.getExternalPort(row[-2])
       if (port!=None):
-        print('<td><a href="http://supayr.ninja:{1}" target="_blank">{0}</a></td>'.format(row[0],port))
+        print('<td><a href="http://supayr.ninja:{1}" target="_blank">{0}</a></td>'.format(row[0],port[1]))
       else:
         print('<td>{0}</td>'.format(row[0]))
         
@@ -48,7 +48,7 @@ class Parser(object):
         print('<td>{0}</td>'.format(cellContent))
       print('<td>')
       print('  <form method="post" action="docker_handler.cgi">')
-      print('    <input type="text" name="newPort" value="{0}" defaultValue="{0}" onfocus="this.style.border=\'1px solid lightgrey\'; this.style.background=\'white\';" onblur="this.style.border=\'none\'; this.style.background=\'transparent\'; if (this.value!=this.getAttribute(\'defaultValue\')) this.form.submit();" >'.format(row[-2]))
+      print('    <input type="text" name="newPort" value="{0}" defaultValue="{0}" port="{1}" onfocus="this.style.border=\'1px solid lightgrey\'; this.style.background=\'white\'; this.value=this.getAttribute(\'port\')" onblur="this.style.border=\'none\'; this.style.background=\'transparent\'; if (this.value!=this.getAttribute(\'port\')) this.form.submit(); else this.value=this.getAttribute(\'defaultValue\');" >'.format(row[-2],port[0]+":"+port[1] if port!=None else ''))
       print('    <input type="hidden" name="serviceId" value="{0}">'.format(row[0]))
       print('    <input type="hidden" name="imageName" value="{0}">'.format(row[1]))
       print('  </form>')
