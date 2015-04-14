@@ -1,8 +1,5 @@
 #!/bin/bash
 
-test=""
-test2=""
-
 if [ "$REQUEST_METHOD" = "POST" ]; then
   POST=$(</dev/stdin)
   # Start / Stop container
@@ -74,7 +71,6 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     if [[ $imageName =~ ^(.*)%3A(.*)$ ]]; then
       imageName="${BASH_REMATCH[1]}"
     fi
-    test=$newPort
     # on regarde s'il s'agit d'une image mère
     if [[ "$(cat ../dockerfile/image.dat)" =~ $imageName ]]; then
       i=1
@@ -108,8 +104,6 @@ echo '    <div id="userinfo">'
 echo '      <p>Nom : root</p>'
 echo '      <p>Pass : root</p>'
 echo '      <p>DjangoCMS Login : admin / Pass : djangocms</p>'
-echo "$test"
-#echo "$test2"
 echo '    </div>'
 echo '    <div id="services">'
 python ../format/containers.py "$(docker ps -a)"
