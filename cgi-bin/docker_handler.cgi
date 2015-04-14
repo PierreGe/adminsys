@@ -54,6 +54,16 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     docker run --name $mysqlName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest > /dev/null
     docker run --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress > /dev/null
   fi
+  
+  # add djangocms
+  if [[ $POST =~ ^djangocms=install\&djangocmsName=(.*)\&djangocmsPort=(.*)$ ]]; then
+    wpName="${BASH_REMATCH[1]}"
+    mysqlName="mysql-"$wpName
+    wpPort="${BASH_REMATCH[2]}"
+    mysqlPass="${BASH_REMATCH[3]}"
+    docker run --name $mysqlName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest > /dev/null
+    docker run --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress > /dev/null
+  fi
   # change container port
   if [[ $POST =~ ^newPort=(.*)\&serviceId=(.*)\&imageName=(.*)$ ]]; then
     newPort="${BASH_REMATCH[1]/'%3A'/:}"
