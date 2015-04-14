@@ -1,6 +1,7 @@
 #!/bin/bash
 
 test=""
+test2=""
 
 if [ "$REQUEST_METHOD" = "POST" ]; then
   POST=$(</dev/stdin)
@@ -77,7 +78,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     fi
     
     docker commit $serviceId $imageName > /dev/null
-    docker run -p $newPort -td $imageName > /dev/null
+    docker run -p $newPort -td $imageName > $test2
     docker rm $serviceId > /dev/null
   fi
 fi
@@ -100,6 +101,7 @@ echo '    <div id="userinfo">'
 echo '      <p>Nom : root</p>'
 echo '      <p>Pass : root</p>'
 echo "$test"
+echo "$test2"
 echo '    </div>'
 echo '    <div id="services">'
 python ../format/containers.py "$(docker ps -a)"
