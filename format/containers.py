@@ -25,7 +25,10 @@ class Parser(object):
     j=i-1
     while string[j]!=':':
       j-=1
-    return (string[:j],string[j+1:i])
+    k=i+2
+    while string[k]!='/':
+      k+=1
+    return (string[i+2:k],string[j+1:i])
 
   def format(self):
     print('<table>')
