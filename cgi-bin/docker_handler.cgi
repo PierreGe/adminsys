@@ -107,6 +107,7 @@ echo '  <div id="content">'
 echo '    <div id="userinfo">'
 echo '      <p>Nom : root</p>'
 echo '      <p>Pass : root</p>'
+echo '      <p>DjangoCMS Login : admin / Pass : djangocms</p>'
 echo "$test"
 #echo "$test2"
 echo '    </div>'
