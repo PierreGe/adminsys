@@ -11,6 +11,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
       docker start $service > /dev/null
     fi
   fi
+  # Duplication / Fork
   if [[ $POST =~ ^duplicate=(.*)$ ]]; then
     service="${BASH_REMATCH[1]}"
     if [[ "$(docker ps)" =~ $service ]]; then
@@ -23,6 +24,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
       docker start $service
     fi
   fi
+  # Suppression
   if [[ $POST =~ ^delete=(.*)$ ]]; then
     service="${BASH_REMATCH[1]}"
     if [[ "$(docker ps)" =~ $service ]]; then
@@ -36,6 +38,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     oldName="${BASH_REMATCH[2]}"
     docker rename "$oldName" "$newName"
   fi
+  # Install from Docker Hub
   if [[ $POST =~ ^installDockerhubApp=(.*)\&dockerPort=(.*)$ ]]; then
     app="${BASH_REMATCH[1]}"
     port="${BASH_REMATCH[2]}"
@@ -51,7 +54,6 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     docker run --name $mysqlName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest > /dev/null
     docker run --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress > /dev/null
   fi
-  
   # add djangocms
   if [[ $POST =~ ^djangocms=install\&djangocmsName=(.*)\&djangocmsPort=(.*)$ ]]; then
     djcmsName="${BASH_REMATCH[1]}"
