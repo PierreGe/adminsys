@@ -12,16 +12,17 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     fi
   fi
   # Duplication / Fork
-  if [[ $POST =~ ^duplicate=(.*)$ ]]; then
-    service="${BASH_REMATCH[1]}"
-    if [[ "$(docker ps)" =~ $service ]]; then
+  if [[ $POST =~ ^duplicate=(.*)\&name=(.*)$ ]]; then
+    serviceId="${BASH_REMATCH[1]}"
+    serviceName="${BASH_REMATCH[1]}""-duplicated"
+    if [[ "$(docker ps)" =~ $serviceId ]]; then
       stopped=true
-      docker stop $service > /dev/null
+      docker stop $serviceId > /dev/null
     fi
-    docker commit $service $service-duplicated
-    docker run -d $service-duplicated
+    docker commit $serviceId $serviceName
+    docker run -d $serviceName
     if [ "$stopped" = true ] ; then
-      docker start $service
+      docker start $serviceId
     fi
   fi
   # Suppression
