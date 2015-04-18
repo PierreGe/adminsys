@@ -14,7 +14,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
   # Duplication / Fork
   if [[ $POST =~ ^duplicate=(.*)\&name=(.*)$ ]]; then
     serviceId="${BASH_REMATCH[1]}"
-    serviceName="${BASH_REMATCH[1]}""-duplicated"
+    serviceName="${BASH_REMATCH[2]}""-duplicated"
     if [[ "$(docker ps)" =~ $serviceId ]]; then
       stopped=true
       docker stop $serviceId > /dev/null
