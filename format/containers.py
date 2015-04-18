@@ -76,6 +76,7 @@ class Parser(object):
       print('  <form method="post" action="docker_handler.cgi">')
       print('    <input type="button" onclick="this.form.submit();" value="Duplicate/Fork" id="duplicate-button-{0}">'.format(row[0]))
       print('    <input name="duplicate" type="hidden" value="{0}">'.format(row[0]))
+      print('    <input name="name" type="hidden" value="{0}">'.format(row[-1]))
       print('  </form>')
       print('</td>')
       print('<td>')
