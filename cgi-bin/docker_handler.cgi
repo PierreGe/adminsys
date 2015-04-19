@@ -20,7 +20,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
       docker stop $serviceId > /dev/null
     fi
     docker commit $serviceId $serviceName
-    docker run --restart=on-failure:4 -d $serviceName
+    docker run --restart=always -d $serviceName
     if [ "$stopped" = true ] ; then
       docker start $serviceId
     fi
@@ -43,7 +43,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
   if [[ $POST =~ ^installDockerhubApp=(.*)\&dockerPort=(.*)$ ]]; then
     app="${BASH_REMATCH[1]}"
     port="${BASH_REMATCH[2]}"
-    (docker pull $app > /dev/null; docker run --restart=on-failure:4 -p $port:80 -d $app > /dev/null )&
+    (docker pull $app > /dev/null; docker run --restart=always -p $port:80 -d $app > /dev/null )&
     $app"\n" >> ../dockerfile/image.dat
   fi
   # add wordpress
@@ -52,14 +52,14 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     mysqlName="mysql-"$wpName
     wpPort="${BASH_REMATCH[2]}"
     mysqlPass="${BASH_REMATCH[3]}"
-    docker run --restart=on-failure:4 --name $mysqlName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest > /dev/null
-    docker run --restart=on-failure:4 --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress > /dev/null
+    docker run --restart=always --name $mysqlName -e MYSQL_ROOT_PASSWORD=$mysqlPass -d mysql:latest > /dev/null
+    docker run --restart=always --name $wpName --link $mysqlName:mysql -p $wpPort:80 -d wordpress > /dev/null
   fi
   # add djangocms
   if [[ $POST =~ ^djangocms=install\&djangocmsName=(.*)\&djangocmsPort=(.*)$ ]]; then
     djcmsName="${BASH_REMATCH[1]}"
     djcmsPort="${BASH_REMATCH[2]}"
-    docker run --restart=on-failure:4 --name $djcmsName -p $wpPort:8000 -d bluszcz/djangocms > /dev/null
+    docker run --restart=always --name $djcmsName -p $wpPort:8000 -d bluszcz/djangocms > /dev/null
   fi
   # change container port
   if [[ $POST =~ ^newPort=(.*)\&serviceId=(.*)\&imageName=(.*)$ ]]; then
@@ -84,7 +84,7 @@ if [ "$REQUEST_METHOD" = "POST" ]; then
     fi
     
     docker commit $serviceId $imageName > /dev/null
-    docker run --restart=on-failure:4 -p $newPort -td $imageName > /dev/null
+    docker run --restart=always -p $newPort -td $imageName > /dev/null
     docker rm $serviceId > /dev/null
   fi
 fi
