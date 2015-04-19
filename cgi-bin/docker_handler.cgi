@@ -107,7 +107,7 @@ echo '  <div id="content">'
 #echo '      <p>DjangoCMS Login : admin / Pass : djangocms</p>'
 #echo '    </div>'
 echo "    <h1> Interface d'administration </h1>"
-echo "    <h2> Services en cours d'éxection </h2>"
+echo "    <h2> Services en cours d'éxecution </h2>"
 echo '    <div id="services">'
 python ../format/containers.py "$(docker ps -a)"
 echo '      <div id="tools">'
